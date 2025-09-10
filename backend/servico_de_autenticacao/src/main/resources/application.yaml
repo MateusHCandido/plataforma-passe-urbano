@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: servico-de-autenticacao
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sistema_cartao_transporte
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+
+oauth:
+  client:
+    login: urbanape
+    secret: urbanape123
+
+security:
+  jwt:
+    signing-key: urbanape
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+
+server:
+  port: 8000
