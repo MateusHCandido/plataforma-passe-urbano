@@ -40,8 +40,15 @@ public class UsuarioLoginService implements UserDetailsService {
         usuario.setSenha(request.getSenha());
         usuario.setPermissao(permissao);
         usuarioRepository.save(usuario);
+        usuarioRepository.salvarUsuarioEmUsuarioService(
+                usuario.getId(),
+                usuario.getNome(),
+                usuario.getEmail(),
+                usuario.getSenha()
+        );
     }
 
+    //Carrega os dados do usuário com a permissão cadastrada
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepository.findByEmail(email)

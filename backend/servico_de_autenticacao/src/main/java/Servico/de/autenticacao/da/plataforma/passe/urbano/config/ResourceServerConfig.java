@@ -13,7 +13,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/usuario/**").authenticated()
+                // Endpoints públicos
+                .antMatchers("/auth/login", "/auth/register").permitAll()
+                // Endpoint restrito apenas a ADMIN
+                .antMatchers("/usuario-autenticado/cadastrar").hasRole("ADMIN")
+                // Endpoints de documentação do Swagger
                 .antMatchers(
                         "/swagger-ui/**",
                         "/swagger-ui.html",
@@ -21,6 +25,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         "/v3/api-docs.yaml",
                         "/webjars/**"
                 ).permitAll()
+                // Qualquer outro endpoint não configurado será negado
                 .anyRequest().denyAll();
     }
+
+
 }

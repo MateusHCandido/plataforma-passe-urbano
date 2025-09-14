@@ -3,7 +3,7 @@ package Servico.de.autenticacao.da.plataforma.passe.urbano.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "roles", schema = "auth")
 public class Permissao {
 
     @Id

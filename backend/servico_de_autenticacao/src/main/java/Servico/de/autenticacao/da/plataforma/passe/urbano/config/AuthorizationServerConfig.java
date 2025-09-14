@@ -55,7 +55,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .authenticationManager(authenticationManager);
     }
 
-    //vai ficar a aplicação angular
+    //vai ficar na aplicação angular
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients
