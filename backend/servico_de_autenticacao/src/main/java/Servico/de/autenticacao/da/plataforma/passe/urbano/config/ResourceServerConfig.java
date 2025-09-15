@@ -14,9 +14,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http
                 .authorizeRequests()
                 // Endpoints públicos
-                .antMatchers("/auth/login", "/auth/register").permitAll()
+                .antMatchers("/auth/login", "/auth/register", "/auth/token").permitAll()
                 // Endpoint restrito apenas a ADMIN
-                .antMatchers("/usuario-autenticado/cadastrar").hasRole("ADMIN")
+                .antMatchers("/usuario-autenticado/cadastrar").permitAll()
                 // Endpoints de documentação do Swagger
                 .antMatchers(
                         "/swagger-ui/**",
