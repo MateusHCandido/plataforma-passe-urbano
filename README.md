@@ -2,10 +2,9 @@
 Plataforma de gerenciamento de cartões de transporte e usuários
 
 
-O Passe Urbano é uma aplicação web para gerenciamento de usuários e cartões de transporte (comum, estudante e trabalhador).
-O sistema permite criar, listar, alterar e ativar/desativar usuários e cartões, além de manter um log de auditoria das ações realizadas no sistema.
+O Passe Urbano é uma aplicação web para gerenciamento de usuários e cartões de transporte (comum, estudante e trabalhador). O sistema permite criar, listar, alterar e ativar/desativar usuários e cartões, além de manter um log de auditoria das ações realizadas no sistema.
 
-A aplicação é construída com Spring Boot para o backend, PostgreSQL como banco de dados e Angular 4 para o frontend.
+A aplicação é construída com Spring Boot para o backend, PostgreSQL como banco de dados e Angular 4 para o frontend. Foi desenvolvida utilizando arquitetura de microserviços, permitindo que cada serviço (usuário, autenticação, gateway, descoberta) seja independente e escalável. Além disso, o projeto adota design patterns, como Factory, para garantir código modular, reutilizável e de fácil manutenção.
 
 ## Funcionalidades
 
