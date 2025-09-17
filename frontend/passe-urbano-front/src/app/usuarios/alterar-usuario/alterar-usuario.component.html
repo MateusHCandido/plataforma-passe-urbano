@@ -1,0 +1,87 @@
+<!-- Container de busca -->
+<div class="alterar-usuario-container">
+  <h2>Alterar Usuário</h2>
+
+  <div class="form-group">
+    <label for="emailBusca">Email do usuário</label>
+    <input
+      type="email"
+      id="emailBusca"
+      [(ngModel)]="emailBusca"
+      name="emailBusca"
+      placeholder="Digite o email do usuário"
+      required
+    />
+  </div>
+
+  <button class="btn-urbana" (click)="buscarUsuario()" [disabled]="carregando">
+    {{ carregando ? 'Buscando...' : 'Buscar Usuário' }}
+  </button>
+
+  <div *ngIf="mensagemErro" class="mensagem-erro">{{ mensagemErro }}</div>
+</div>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="usuarioEncontrado">
+  <div class="modal-content">
+    <h2>Informações do Usuário</h2>
+
+    <p><strong>Nome:</strong> {{ usuarioEncontrado.nome }}</p>
+    <p><strong>Email:</strong> {{ usuarioEncontrado.email }}</p>
+
+    <div *ngIf="usuarioEncontrado.cartoes?.length > 0">
+      <h3>Cartões</h3>
+      <ul class="cartoes-lista">
+        <li *ngFor="let cartao of usuarioEncontrado.cartoes">
+          <p><strong>Número:</strong> {{ cartao.numeroCartao }}</p>
+          <p><strong>Tipo:</strong> {{ cartao.tipoCartao }}</p>
+          <p>
+            <strong>Status:</strong>
+            <span [ngClass]="cartao.statusCartao ? 'ativo' : 'inativo'">
+              {{ cartao.statusCartao ? 'ATIVO' : 'INATIVO' }}
+            </span>
+          </p>
+          <hr />
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="!usuarioEncontrado.cartoes || usuarioEncontrado.cartoes.length === 0">
+      <p>Não há cartões cadastrados.</p>
+    </div>
+
+    <!-- Formulário de alteração -->
+    <form #usuarioForm="ngForm" (ngSubmit)="alterarUsuario(usuarioForm)">
+      <div class="form-group">
+        <label for="nome">Nome</label>
+        <input
+          type="text"
+          id="nome"
+          name="nome"
+          [(ngModel)]="usuarioEncontrado.nome"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="senha">Nova Senha</label>
+        <input
+          type="password"
+          id="senha"
+          name="senha"
+          [(ngModel)]="novaSenha"
+          placeholder="Digite nova senha (opcional)"
+        />
+      </div>
+
+      <button type="submit" class="btn-urbana" [disabled]="usuarioForm.invalid || carregando">
+        {{ carregando ? 'Alterando...' : 'Alterar Usuário' }}
+      </button>
+
+      <div *ngIf="mensagemSucesso" class="mensagem-sucesso">{{ mensagemSucesso }}</div>
+      <div *ngIf="mensagemErro" class="mensagem-erro">{{ mensagemErro }}</div>
+    </form>
+
+    <button class="btn-fechar" (click)="usuarioEncontrado = null">Fechar</button>
+  </div>
+</div>

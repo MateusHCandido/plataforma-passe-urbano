@@ -1,0 +1,78 @@
+<div class="usuarios-container">
+  <!-- Barra de busca -->
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Buscar usuário..."
+      [(ngModel)]="filtro"
+      (input)="filtrarUsuarios()"
+    />
+  </div>
+
+  <!-- Tabela -->
+  <table class="usuarios-table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Cartões</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let usuario of usuariosPaginados"
+        (click)="abrirModal(usuario)"
+        class="linha-clickable"
+      >
+        <td>{{ usuario.nome }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.cartoes?.length || 0 }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Paginação -->
+  <div class="pagination">
+    <button
+      *ngFor="let page of paginas"
+      (click)="mudarPagina(page)"
+      [class.active]="page === paginaAtual"
+    >
+      {{ page }}
+    </button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="usuarioSelecionado">
+  <div class="modal-content">
+    <h2>Detalhes do Usuário</h2>
+    <p><strong>Nome:</strong> {{ usuarioSelecionado.nome }}</p>
+    <p><strong>Email:</strong> {{ usuarioSelecionado.email }}</p>
+
+    <div *ngIf="usuarioSelecionado.cartoes?.length > 0">
+      <h3>Cartões</h3>
+      <ul class="cartoes-lista">
+        <li *ngFor="let cartao of usuarioSelecionado.cartoes">
+          <p><strong>Número:</strong> {{ cartao.numeroCartao }}</p>
+          <p><strong>Tipo de cartão:</strong> {{ cartao.tipoCartao }}</p>
+          <p>
+            <strong>Status:</strong>
+            <span [ngClass]="cartao.statusCartao ? 'ativo' : 'inativo'">
+              {{ cartao.statusCartao ? 'ATIVO' : 'INATIVO' }}
+            </span>
+          </p>
+          <hr />
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="!usuarioSelecionado.cartoes || usuarioSelecionado.cartoes.length === 0">
+      <p>Não há cartões cadastrados.</p>
+    </div>
+
+    <button class="btn-fechar" (click)="fecharModal()">Fechar</button>
+  </div>
+</div>
+
+
