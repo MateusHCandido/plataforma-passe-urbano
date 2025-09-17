@@ -5,7 +5,7 @@ spring:
     gateway:
       routes:
         - id: servico-de-usuario
-          uri: lb://servico-de-usuario:8001
+          uri: lb://servico-de-usuario
           predicates:
             - Path=/usuario/**
 
@@ -14,10 +14,16 @@ spring:
           predicates:
             - Path=/cartao/**
 
+        - id: servico-de-log
+          uri: lb://servico-de-usuario
+          predicates:
+            - Path=/log/**
+
         - id: servico-de-autenticacao
-          uri: lb://servico-de-autenticacao:8000
+          uri: lb://servico-de-autenticacao
           predicates:
             - Path=/usuario-autenticado/**
+
 
 eureka:
   client:
