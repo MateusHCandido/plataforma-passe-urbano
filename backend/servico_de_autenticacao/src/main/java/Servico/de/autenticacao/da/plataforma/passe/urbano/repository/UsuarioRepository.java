@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -16,10 +17,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO service.usuario_cartao (usuario_id, nome, email, senha) " +
-            "VALUES (:id, :nome, :email, :senha)", nativeQuery = true)
+    @Query(value = "INSERT INTO service.usuario_cartao (nome, email, senha) " +
+            "VALUES (:nome, :email, :senha)", nativeQuery = true)
     void salvarUsuarioEmUsuarioService(
-            @Param("id") Long id,
             @Param("nome") String nome,
             @Param("email") String email,
             @Param("senha") String senha);

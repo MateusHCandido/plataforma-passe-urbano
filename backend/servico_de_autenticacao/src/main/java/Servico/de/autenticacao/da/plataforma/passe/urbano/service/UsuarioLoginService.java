@@ -5,6 +5,7 @@ import Servico.de.autenticacao.da.plataforma.passe.urbano.entity.Permissao;
 import Servico.de.autenticacao.da.plataforma.passe.urbano.entity.Usuario;
 import Servico.de.autenticacao.da.plataforma.passe.urbano.repository.PermissaoRepository;
 import Servico.de.autenticacao.da.plataforma.passe.urbano.repository.UsuarioRepository;
+import Servico.de.autenticacao.da.plataforma.passe.urbano.service.dto.UsuarioEmailPermissaoDTO;
 import Servico.de.autenticacao.da.plataforma.passe.urbano.service.dto.UsuarioRequest;
 import Servico.de.autenticacao.da.plataforma.passe.urbano.service.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -41,7 +45,6 @@ public class UsuarioLoginService implements UserDetailsService {
         usuario.setPermissao(permissao);
         usuarioRepository.save(usuario);
         usuarioRepository.salvarUsuarioEmUsuarioService(
-                usuario.getId(),
                 usuario.getNome(),
                 usuario.getEmail(),
                 usuario.getSenha()
@@ -62,5 +65,11 @@ public class UsuarioLoginService implements UserDetailsService {
                 .password(usuario.getSenha())
                 .roles(role)
                 .build();
+    }
+
+    public List<UsuarioEmailPermissaoDTO> listaUsuarioPermissao() {
+        return usuarioRepository.findAll().stream()
+                .map(UsuarioEmailPermissaoDTO::new)
+                .collect(Collectors.toList());
     }
 }

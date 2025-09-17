@@ -1,10 +1,13 @@
 package Servico.de.autenticacao.da.plataforma.passe.urbano.controller;
 
 import Servico.de.autenticacao.da.plataforma.passe.urbano.service.UsuarioLoginService;
+import Servico.de.autenticacao.da.plataforma.passe.urbano.service.dto.UsuarioEmailPermissaoDTO;
 import Servico.de.autenticacao.da.plataforma.passe.urbano.service.dto.UsuarioRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/usuario-autenticado")
@@ -19,5 +22,11 @@ public class UsuarioController {
     public String cadastrarUsuario(@RequestBody UsuarioRequest request){
         usuarioService.salvarUsuario(request);
         return "Usuário cadastrado com sucesso";
+    }
+
+    @GetMapping(path = "/listar")
+    @ResponseStatus(HttpStatus.OK)
+    public List<UsuarioEmailPermissaoDTO> listaEmailPermissaoUsuario(){
+        return usuarioService.listaUsuarioPermissao();
     }
 }
