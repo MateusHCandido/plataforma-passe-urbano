@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AutenticacaoService } from '../../services/autenticacao.service';
-import * as jwt_decode from 'jwt-decode';
+
 
 @Component({
   selector: 'app-login',
@@ -11,28 +11,38 @@ import * as jwt_decode from 'jwt-decode';
 export class LoginComponent {
   email: string = '';
   senha: string = '';
+  
 
   constructor(
     private authService: AutenticacaoService,
     private router: Router
   ) {}
 
+  
   autenticar() {
+    if (!this.email || !this.senha) {
+      console.error('Email e senha são obrigatórios');
+      return;
+    }
+
     this.authService.login(this.email, this.senha).subscribe({
       next: (response) => {
-        // Salva token no localStorage
+        if (!response.access_token) {
+          console.error('Token não retornado pelo backend');
+          return;
+        }
+
         localStorage.setItem('access_token', response.access_token);
 
-        // Decodifica o token e salva os dados do usuário
-        const usuario: any = (jwt_decode as any)(response.access_token);
-        localStorage.setItem('usuario', JSON.stringify(usuario));
-
-        // Redireciona para o painel
-        this.router.navigate(['/painel']);
+        this.router.navigate(['/home']);
       },
       error: (err) => {
         console.error('Erro ao autenticar usuário', err);
+        alert('Email ou senha inválidos!');
       }
     });
   }
+
+ 
+
 }

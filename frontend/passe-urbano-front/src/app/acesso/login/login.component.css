@@ -26,11 +26,8 @@ input::placeholder {
     font-weight: 450;
 }
 
-
-  
-
 .btn-urbana {
-background-color: #00acc9; /* Verde principal */
+background-color: #00acc9; 
 color: #ffffff;
 border-radius: 8px;
 transition: background-color 0.3s ease;
