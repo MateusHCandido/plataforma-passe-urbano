@@ -5,3 +5,10 @@ INSERT INTO service.cartao (cartao_id, nome, tipo_cartao, status_cartao, usuario
 (3, 'Cartão João', 'TRABALHADOR', TRUE, 4),
 (4, 'Cartão Maria', 'COMUM', FALSE, 5),
 (5, 'Cartão Ana', 'ESTUDANTE', TRUE, 6);
+
+-- Sincroniza a sequence do cartao_id
+SELECT setval(
+  'service.cartao_cartao_id_seq',
+  (SELECT COALESCE(MAX(cartao_id), 0) FROM service.cartao),
+  true
+);

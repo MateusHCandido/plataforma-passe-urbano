@@ -5,3 +5,8 @@ INSERT INTO service.usuario_cartao (usuario_id, nome, email, senha) VALUES
 (4,'Maria Oliveira', 'maria@example.com', 'senha789'),
 (5,'Ana Souza', 'ana@example.com', 'senha321'),
 (6,'Pedro Costa', 'pedro@example.com', 'senha654');
+
+SELECT setval(
+    'service.usuario_cartao_usuario_id_seq',
+    (SELECT COALESCE(MAX(usuario_id), 1) FROM service.usuario_cartao)
+);

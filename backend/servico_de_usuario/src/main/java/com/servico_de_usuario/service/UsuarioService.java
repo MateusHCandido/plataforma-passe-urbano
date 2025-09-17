@@ -18,6 +18,9 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private AuditLogService auditLogService;
+
 
     public List<UsuarioResponseDTO> listarUsuarios(){
         List<Usuario> usuarios = usuarioRepository.findAll();
@@ -26,12 +29,14 @@ public class UsuarioService {
                 .collect(Collectors.toList());
     }
 
-    public void alterarUsuario(UsuarioRequestDTO request){
+    public void alterarUsuario(UsuarioRequestDTO request, String emailUsuario){
         String novoNomeUsuario = request.getNome();
         String novaSenha = request.getSenha();
         // usa email para trocar novoNomeUsuario ou novaSenha
         Usuario usuario = usuarioRepository.findByEmail(request.getEmail())
                 .orElseThrow(EmailNotFoundException::new);
+
+        Long usuarioId = usuario.getUsuarioId();
 
         if (novoNomeUsuario != null && !novoNomeUsuario.isEmpty()){
             usuarioRepository.updateNomeUsuarioCartao(usuario.getEmail(), novoNomeUsuario);
@@ -47,16 +52,32 @@ public class UsuarioService {
             usuarioRepository.updateSenhaUsuarioAcesso(usuario.getEmail(), senhaCriptografada);
         }
 
-        usuarioRepository.save(usuario);
+        Usuario usuarioAlterado = usuarioRepository.save(usuario);
+        auditLogService.registrarAcao(
+                emailUsuario,
+                "ALTERAR_USUARIO",
+                "USUARIO",
+                usuarioId,
+                "path: /usuario/alterar"
+        );
+
     }
 
-    public void removerUsuario(UsuarioRequestDTO request){
-        Usuario usuario = usuarioRepository.findByEmail(request.getEmail())
+    public void removerUsuario(String emailParaDeletar, String emailUsuario){
+        Usuario usuario = usuarioRepository.findByEmail(emailParaDeletar)
                 .orElseThrow(EmailNotFoundException::new);
 
-        if (usuario == null) throw new EmailNotFoundException();
+        Long usuarioId = usuario.getUsuarioId();
 
         usuarioRepository.delete(usuario);
+        usuarioRepository.deleteUsuarioByEmail(emailParaDeletar);
+        auditLogService.registrarAcao(
+                emailUsuario,
+                "REMOVER_USUARIO",
+                "USUARIO",
+                usuarioId,
+                "path: /usuario/deletar?email="
+        );
     }
 
 

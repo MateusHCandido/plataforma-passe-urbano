@@ -55,17 +55,22 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 ).permitAll()
 
                 // Endpoints de consulta e adição restritos a ADMIN
-                .antMatchers("/usuario/consultar", "/cartao/adicionar", "/cartao/listar")
-                .hasRole("ADMIN")
+                .antMatchers(
+                        "/cartao/remover/**",
+                        "/usuario/deletar"
+                ).hasRole("ADMIN")
 
                 // Endpoints que qualquer usuário autenticado pode acessar
                 .antMatchers(
+                        "/usuario/consultar",
                         "/usuario/auto/consulta",
                         "/usuario/alterar",
-                        "/usuario/deletar",
-                        "/cartao/remover",
+                        "/cartao/adicionar",
+                        "/cartao/listar",
+                        "/cartao/buscar/**",
                         "/cartao/listar/by/email",
-                        "/cartao/ativar/inativar/**"
+                        "/cartao/ativar/inativar/**",
+                        "/log/logs/**"
                 ).authenticated()
 
                 // Bloqueia qualquer outro endpoint não listado

@@ -20,16 +20,25 @@ public class CartaoController {
 
     //Cria cartões: Só o admin pode criar
     @PostMapping("/adicionar")
-    public ResponseEntity<String> criarCartao(@RequestBody CartaoRequestDTO request){
-        cartaoService.adicionarCartao(request);
+    public ResponseEntity<String> criarCartao(
+            @RequestBody CartaoRequestDTO request,
+            @RequestParam("emailUsuario") String emailUsuario){
+        cartaoService.adicionarCartao(request, emailUsuario);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Cartão criado com sucesso!");
     }
 
+    @GetMapping("/buscar/{numeroCartao}")
+    public ResponseEntity<CartaoResponseDTO> buscarCartaoByNumero(@PathVariable("numeroCartao") Long numeroCartao){
+        return ResponseEntity.status(HttpStatus.OK).body(cartaoService.buscarCartaoByNumero(numeroCartao));
+    }
+
     //Deleta cartões: o usuário só pode deleter o próprio e admin todos
     @DeleteMapping("/remover/{numeroCartao}")
-    public ResponseEntity<String> removerCartao(@PathVariable("numeroCartao") Long numeroCartao){
-        cartaoService.removerCartao(numeroCartao);
+    public ResponseEntity<String> removerCartao(
+            @PathVariable("numeroCartao") Long numeroCartao,
+            @RequestParam("emailUsuario") String emailUsuario){
+        cartaoService.removerCartao(numeroCartao, emailUsuario);
 
         return ResponseEntity.status(HttpStatus.OK).body("Cartão removido com sucesso");
     }
@@ -57,8 +66,10 @@ public class CartaoController {
     }
 
     @PutMapping("/ativar/inativar/{numeroCartao}")
-    public ResponseEntity<String> ativarInativaCartao(@PathVariable("numeroCartao") Long numeroCartao){
-        boolean statusCartao = cartaoService.ativarInativarCartao(numeroCartao);
+    public ResponseEntity<String> ativarInativaCartao(
+            @PathVariable("numeroCartao") Long numeroCartao,
+            @RequestParam("emailUsuario") String emailUsuario){
+        boolean statusCartao = cartaoService.ativarInativarCartao(numeroCartao, emailUsuario);
 
         if (statusCartao) {
             return ResponseEntity.ok("Alteração de estado para ATIVO realizada");

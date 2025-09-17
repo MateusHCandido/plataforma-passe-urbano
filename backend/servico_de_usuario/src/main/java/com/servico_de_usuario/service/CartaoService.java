@@ -29,11 +29,14 @@ public class CartaoService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private AuditLogService auditLogService;
+
     @PersistenceContext
     private EntityManager entityManager;
 
 
-    public void adicionarCartao(CartaoRequestDTO request){
+    public void adicionarCartao(CartaoRequestDTO request, String emailUsuario){
         Usuario usuario = usuarioRepository.findByEmail(request.getEmailUsuario())
                 .orElseThrow(EmailNotFoundException::new);
 
@@ -55,12 +58,22 @@ public class CartaoService {
 
         usuario.getCartoes().add(cartaoSalvo);
         usuarioRepository.save(usuario);
+
+        auditLogService.registrarAcao(
+                emailUsuario,
+                "ADICIONAR_CARTAO",
+                "CARTAO",
+                cartaoSalvo.getCartaoId(),
+                "path: /cartao/adicionar"
+        );
     }
 
     @Transactional
-    public void removerCartao(Long numeroCartao){
+    public void removerCartao(Long numeroCartao, String emailUsuario){
         Cartao cartao = cartaoRepository.findByNumeroCartao(numeroCartao)
                 .orElseThrow(CardNotFoundException::new);
+
+        Long cartaoExcluidoId = cartao.getCartaoId();
 
         cartaoRepository.delete(cartao);
 
@@ -70,6 +83,14 @@ public class CartaoService {
                         "SELECT setval('service.cartao_cartao_id_seq', :maxId)")
                 .setParameter("maxId", maxId)
                 .getSingleResult();
+
+        auditLogService.registrarAcao(
+                emailUsuario,
+                "REMOVER_CARTAO",
+                "CARTAO",
+                cartaoExcluidoId,
+                "path: /cartao/remover/{numeroCartao}"
+        );
     }
 
     public List<CartaoResponseDTO> listarCartoes(){
@@ -87,16 +108,31 @@ public class CartaoService {
                 .collect(Collectors.toList());
     }
 
-    public boolean ativarInativarCartao(Long numeroCartao){
+    public boolean ativarInativarCartao(Long numeroCartao, String emailUsuario){
         Cartao cartao = cartaoRepository.findByNumeroCartao(numeroCartao)
                 .orElseThrow(CardNotFoundException::new);
+
+        Long cartaoId = cartao.getCartaoId();
 
         cartao.setStatusCartao(!cartao.getStatusCartao());
 
         cartaoRepository.save(cartao);
+        auditLogService.registrarAcao(
+                emailUsuario,
+                "ATIVAR_DESATIVAR_CARTAO",
+                "CARTAO",
+                cartaoId,
+                "path: /cartao/ativar/inativar/{numeroCartao}"
+        );
 
         return cartao.getStatusCartao();
     }
 
 
+    public CartaoResponseDTO buscarCartaoByNumero(Long numeroCartao) {
+        Cartao cartao = cartaoRepository.findByNumeroCartao(numeroCartao)
+                .orElseThrow(CardNotFoundException::new);
+
+        return new CartaoResponseDTO(cartao);
+    }
 }

@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.parameters.P;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -36,4 +37,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Transactional
     @Query(value = "UPDATE auth.usuarios SET senha = :novaSenha WHERE email = :email", nativeQuery = true)
     void updateSenhaUsuarioAcesso(@Param("email") String email, @Param("novaSenha") String novaSenha);
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM auth.usuarios WHERE email = :email", nativeQuery = true)
+    void deleteUsuarioByEmail(@Param("email") String email);
 }
