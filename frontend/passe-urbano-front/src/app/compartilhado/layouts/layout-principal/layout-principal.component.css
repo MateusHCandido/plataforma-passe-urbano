@@ -1,0 +1,112 @@
+/* Sidebar */
+.sidebar-custom {
+  background-color: #00acc9; 
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+/* Sidebar header */
+.sidebar-header h4 {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* Links da sidebar */
+.nav-link {
+  color: #ffffff;
+  transition: background-color 0.2s, padding-left 0.2s;
+  border-radius: 4px;
+}
+
+/* Hover nos links */
+.nav-link:hover {
+  background-color: #0097a7; 
+  padding-left: 12px;
+}
+
+/* Link ativo */
+.nav-link.active {
+  font-weight: bold;
+  background-color: #e4534c; 
+  color: #fff;
+}
+
+/* Topbar */
+.topbar-custom {
+  background-color: #00acc9; 
+  color: #fff;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+/* Conteúdo principal */
+.content-custom {
+  background-color: #ebeaea; 
+  border-radius: 8px;
+  padding: 25px;
+  min-height: 80vh;
+}
+
+/* Sub-menu de usuários */
+.nav .sub-menu {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding-left: 10px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.nav .sub-menu-open {
+  max-height: 500px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.nav .sub-menu-closed {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.nav .sub-menu .nav-item {
+  margin-bottom: 3px;
+}
+
+.nav .sub-menu .nav-link {
+  display: block;
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  background-color: #e4534c; 
+  color: #fff;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.nav .sub-menu .nav-link:hover {
+  background-color: #00acc9; 
+  color: #fff;
+}
+
+/* Botões */
+.btn-urbana {
+  background-color: #00acc9; 
+  color: #ffffff;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-urbana:hover {
+  background-color: #0097a7; 
+  color: #ffffff;
+}
+
+/* Responsividade da sidebar */
+@media (max-width: 767.98px) {
+  .sidebar-custom {
+    position: absolute;
+    z-index: 1050;
+    height: 100%;
+  }
+}

@@ -1,0 +1,106 @@
+<div class="d-flex vh-100 flex-column flex-md-row">
+  <!-- Sidebar -->
+  <nav 
+    [ngClass]="{'d-none d-md-flex': !sidebarOpen, 'd-flex flex-column': true}" 
+    class="bg-urbana text-white p-3 flex-shrink-0 sidebar-custom"
+    style="width: 220px;"
+  >
+    <div class="sidebar-header mb-4">
+      <h4 class="text-urbana">Urbana-PE</h4>
+    </div>
+
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2">
+        <a routerLink="/home" routerLinkActive="active" class="nav-link text-white">Home</a>
+      </li>
+      <!-- Configurações com sub-menu -->
+      <li class="nav-item mb-2">
+        <a href="#" (click)="toggleConfigMenu($event)" class="nav-link text-white">
+          Configurações
+        </a>
+        <ul
+          [ngClass]="{ 'sub-menu-open': configMenuOpen, 'sub-menu-closed': !configMenuOpen }"
+          class="nav flex-column sub-menu"
+        >
+          <li class="nav-item mb-1">
+            <a routerLink="/config/logs" routerLinkActive="active" class="nav-link text-white">
+              Logs
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- Usuários com sub-menu -->
+      <li class="nav-item mb-2">
+        <a href="#" (click)="toggleUsuariosMenu($event)" class="nav-link text-white">
+          Usuários
+        </a>
+        <ul 
+          [ngClass]="{'sub-menu-open': usuariosMenuOpen, 'sub-menu-closed': !usuariosMenuOpen}" 
+          class="nav flex-column sub-menu"
+        >
+          <li class="nav-item mb-1">
+            <a routerLink="/usuarios/lista" routerLinkActive="active" class="nav-link text-white">Listar usuários</a>
+          </li>
+          <li class="nav-item mb-1" *ngIf="authService.isAdmin()">
+            <a routerLink="/usuarios/adicionar" routerLinkActive="active" class="nav-link text-white">Adicionar usuários</a>
+          </li>
+          <li class="nav-item mb-1">
+            <a routerLink="/usuarios/alterar" routerLinkActive="active" class="nav-link text-white">Alterar usuários</a>
+          </li>
+          <li class="nav-item mb-1" *ngIf="authService.isAdmin()">
+            <a routerLink="/usuarios/excluir" routerLinkActive="active" class="nav-link text-white">Excluir usuários</a>
+          </li>
+        </ul>
+      </li>
+      
+      <!-- Cartões com sub-menu -->
+      <li class="nav-item mb-2">
+        <a href="#" (click)="toggleCartoesMenu($event)" class="nav-link text-white">
+          Cartões
+        </a>
+        <ul 
+          [ngClass]="{'sub-menu-open': cartoesMenuOpen, 'sub-menu-closed': !cartoesMenuOpen}" 
+          class="nav flex-column sub-menu"
+        >
+          <li class="nav-item mb-1">
+            <a routerLink="/cartoes/adicionar" routerLinkActive="active" class="nav-link text-white">Adicionar Cartão</a>
+          </li>
+          <li class="nav-item mb-1" *ngIf="authService.isAdmin()">
+            <a routerLink="/cartoes/excluir" routerLinkActive="active" class="nav-link text-white">Excluir Cartão</a>
+          </li>
+          <li class="nav-item mb-1">
+            <a routerLink="/cartoes/lista" routerLinkActive="active" class="nav-link text-white">Consultar Cartões</a>
+          </li>
+          <li class="nav-item mb-1">
+            <a routerLink="/cartoes/alterar" routerLinkActive="active" class="nav-link text-white">Ativar/Inativar</a>
+          </li>
+        </ul>
+      </li>
+      
+    </ul>
+
+    <div class="mt-auto">
+      <button class="btn btn-outline-danger w-100" (click)="logout()">Sair</button>
+    </div>
+  </nav>
+
+  <!-- Conteúdo principal -->
+  <div class="flex-grow-1 d-flex flex-column">
+    <!-- Topbar -->
+    <header class="d-flex justify-content-between align-items-center p-3 topbar-custom bg-urbana-light">
+      <div class="d-flex align-items-center">
+        <button class="btn btn-outline-light d-md-none me-2" (click)="toggleSidebar()">
+          &#9776;
+        </button>
+        <h5 class="mb-0 text-white">{{ titulo }}</h5>
+      </div>
+      
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main class="flex-grow-1 p-3 content-custom bg-light">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
