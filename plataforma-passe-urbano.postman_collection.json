@@ -1,0 +1,587 @@
+{
+	"info": {
+		"_postman_id": "2bf7597b-b367-4dbf-b52d-8535fd342919",
+		"name": "plataforma-passe-urbano",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26718913"
+	},
+	"item": [
+		{
+			"name": "segurança",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "urbanape",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "urbanape123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "user@sistema.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "user123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http:///localhost:8000/oauth/token",
+							"protocol": "http",
+							"path": [
+								"localhost:8000",
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cadastro",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTgzNzU5MTcsInVzZXJfbmFtZSI6ImFkbWluQHNpc3RlbWEuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiIyMGU1MTQwZS0yMzRlLTQwZTQtYWNhOS02MDUxNTBkZWJlZWQiLCJjbGllbnRfaWQiOiJ1cmJhbmFwZSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.GLhNM1sfNCqoaLvkpr9MnRaEcnzEkbZWYkSjLaC6RwA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Mateus Testando \",\r\n    \"email\": \"user0@sistema.com\",\r\n    \"senha\": \"user123\",\r\n    \"permissao\": \"USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8765/usuario-autenticado/cadastrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"usuario-autenticado",
+								"cadastrar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "usuario",
+			"item": [
+				{
+					"name": "consultar usuarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTg2NTc3OTgsInVzZXJfbmFtZSI6ImFkbWluQHNpc3RlbWEuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiI0ODFkNGI1YS0zZDk1LTRmNzEtYTYyOC04MzE0NmVjOTU4Y2UiLCJjbGllbnRfaWQiOiJ1cmJhbmFwZSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.u6cwmXDpDdmd1TejhfYhRk3mJABnLyI0Emu_6BCA54E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/usuario/consultar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"usuario",
+								"consultar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alterar usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTg3MjQwOTYsInVzZXJfbmFtZSI6ImFkbWluQHNpc3RlbWEuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiIwMzRlNDIxZS0yZDA3LTRkNjUtYjczZS00MjIwZWMzZmMxNzciLCJjbGllbnRfaWQiOiJ1cmJhbmFwZSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.1C36sCWA6i5VaKL4Y9ld8TNWo21au9ftQbtS3kvT5Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Mateus Henrique\",\r\n    \"email\": \"mateus@example.com\",\r\n    \"senha\": \"senha123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/usuario/alterar?emailUsuario=admin@sistema.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"usuario",
+								"alterar"
+							],
+							"query": [
+								{
+									"key": "emailUsuario",
+									"value": "admin@sistema.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletar usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTg3MjQwOTYsInVzZXJfbmFtZSI6ImFkbWluQHNpc3RlbWEuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiIwMzRlNDIxZS0yZDA3LTRkNjUtYjczZS00MjIwZWMzZmMxNzciLCJjbGllbnRfaWQiOiJ1cmJhbmFwZSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.1C36sCWA6i5VaKL4Y9ld8TNWo21au9ftQbtS3kvT5Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/usuario/deletar?email=joao@example.com&emailUsuario=admin@sistema.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"usuario",
+								"deletar"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "joao@example.com"
+								},
+								{
+									"key": "emailUsuario",
+									"value": "admin@sistema.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auto consulta de usuario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTg0MDU3NjksInVzZXJfbmFtZSI6InVzZXJAc2lzdGVtYS5jb20iLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiYjRjYzJmNTktMWQ5ZC00Y2QyLWE3NDMtZmZjMzlhMWQyYTExIiwiY2xpZW50X2lkIjoidXJiYW5hcGUiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXX0.1Z4_5WX3Aa-pG5I_ZzY_EtPYush8NNUPwiwCXnTdu2U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8765/usuario/auto/consulta?email=admin@sistema.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"usuario",
+								"auto",
+								"consulta"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin@sistema.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar usuarios em email e permissao",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTg3MjQwOTYsInVzZXJfbmFtZSI6ImFkbWluQHNpc3RlbWEuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiIwMzRlNDIxZS0yZDA3LTRkNjUtYjczZS00MjIwZWMzZmMxNzciLCJjbGllbnRfaWQiOiJ1cmJhbmFwZSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.1C36sCWA6i5VaKL4Y9ld8TNWo21au9ftQbtS3kvT5Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8000/usuario-autenticado/listar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"usuario-autenticado",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cartao",
+			"item": [
+				{
+					"name": "adicionar cartao",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTg3MjQwOTYsInVzZXJfbmFtZSI6ImFkbWluQHNpc3RlbWEuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiIwMzRlNDIxZS0yZDA3LTRkNjUtYjczZS00MjIwZWMzZmMxNzciLCJjbGllbnRfaWQiOiJ1cmJhbmFwZSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.1C36sCWA6i5VaKL4Y9ld8TNWo21au9ftQbtS3kvT5Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"emailUsuario\": \"admin@sistema.com\",\r\n    \"tipoCartao\": \"TRABALHADOR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8765/cartao/adicionar?emailUsuario=admin@sistema.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"cartao",
+								"adicionar"
+							],
+							"query": [
+								{
+									"key": "emailUsuario",
+									"value": "admin@sistema.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remover cartao",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTg3NDM3MDYsInVzZXJfbmFtZSI6ImFkbWluQHNpc3RlbWEuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiJmMTA1OWI1Yi1kZmRiLTQ1MDItYWIwOC1hMDkyMTEyYzRhMGEiLCJjbGllbnRfaWQiOiJ1cmJhbmFwZSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.Dfe-21e8RvODbjd_dshKT_sQCdWJo7mNmesYUrGvzAQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/cartao/remover/1000000004?emailUsuario=admin@sistema.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"cartao",
+								"remover",
+								"1000000004"
+							],
+							"query": [
+								{
+									"key": "emailUsuario",
+									"value": "admin@sistema.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar cartões",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTgzMjA2MTIsInVzZXJfbmFtZSI6ImFkbWluQHNpc3RlbWEuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiJkNDYwNzFmNS00MTIxLTRjNWEtYWMwMi0zY2JhYjE1ZjE0ZWIiLCJjbGllbnRfaWQiOiJ1cmJhbmFwZSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.rQXuNNp0sxA9nKvLB6ws8fX-JlO1ccA5Dp60pgkNS2w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/cartao/listar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"cartao",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar cartões por email",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTg3NDM3MDYsInVzZXJfbmFtZSI6ImFkbWluQHNpc3RlbWEuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiJmMTA1OWI1Yi1kZmRiLTQ1MDItYWIwOC1hMDkyMTEyYzRhMGEiLCJjbGllbnRfaWQiOiJ1cmJhbmFwZSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.Dfe-21e8RvODbjd_dshKT_sQCdWJo7mNmesYUrGvzAQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"emailUsuario\": \"mateus@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/cartao/listar/by/email",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"cartao",
+								"listar",
+								"by",
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ativar/inativar cartao",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTg2NTc3OTgsInVzZXJfbmFtZSI6ImFkbWluQHNpc3RlbWEuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiI0ODFkNGI1YS0zZDk1LTRmNzEtYTYyOC04MzE0NmVjOTU4Y2UiLCJjbGllbnRfaWQiOiJ1cmJhbmFwZSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.u6cwmXDpDdmd1TejhfYhRk3mJABnLyI0Emu_6BCA54E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/cartao/ativar/inativar/1000000002?emailUsuario=user@sistema.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"cartao",
+								"ativar",
+								"inativar",
+								"1000000002"
+							],
+							"query": [
+								{
+									"key": "emailUsuario",
+									"value": "user@sistema.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar cartao por numero",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTg2NTc3OTgsInVzZXJfbmFtZSI6ImFkbWluQHNpc3RlbWEuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiI0ODFkNGI1YS0zZDk1LTRmNzEtYTYyOC04MzE0NmVjOTU4Y2UiLCJjbGllbnRfaWQiOiJ1cmJhbmFwZSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.u6cwmXDpDdmd1TejhfYhRk3mJABnLyI0Emu_6BCA54E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/cartao/buscar/1000000002",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"cartao",
+								"buscar",
+								"1000000002"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "configuracao",
+			"item": [
+				{
+					"name": "listar log",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTg3NDQyMTcsInVzZXJfbmFtZSI6InVzZXJAc2lzdGVtYS5jb20iLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiNTNlY2EzNjMtYzI3Zi00ODljLWExNTQtZmYxOTUzOGJiMjFhIiwiY2xpZW50X2lkIjoidXJiYW5hcGUiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXX0.Qkahw91ZI763gEyovHw-rkN3pCZPGzYmu843J3YEN6c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/log/logs?emailUsuario=user@sistema.com&tipoUsuario=ROLE_USER",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"log",
+								"logs"
+							],
+							"query": [
+								{
+									"key": "emailUsuario",
+									"value": "user@sistema.com"
+								},
+								{
+									"key": "tipoUsuario",
+									"value": "ROLE_USER"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
