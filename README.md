@@ -44,6 +44,10 @@ A aplicação é construída com Spring Boot para o backend, PostgreSQL como ban
 - Node.js 10.24.1 (Versão usada no projeto)
 - NPM 6.14.12 (Versão usada no projeto)
 
+## Gerenciamento de projeto realizado no trello
+
+https://trello.com/b/rBgwAn1m/plataforma-passe-urbano
+
 ## Rodando o Projeto Localmente
 
 1. Clone o repositório:
