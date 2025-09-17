@@ -99,6 +99,19 @@ services:
     networks:
       - passe-urbano-net
 
+  passe-urbano-front:
+    build:
+      context: ./frontend/passe-urbano-front
+      dockerfile: Dockerfile
+    container_name: passe-urbano-front
+    restart: always
+    ports:
+      - "4200:4200"
+    depends_on:
+      - postgres
+      - servico-de-gateway
+    networks:
+      - passe-urbano-net
 
 volumes:
   postgres_data:

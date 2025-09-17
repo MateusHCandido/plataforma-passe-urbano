@@ -6,7 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="servico_de_usuario" />
         <module name="servico_de_autenticacao" />
+        <module name="servico-descoberta" />
+        <module name="servico-de-gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -16,7 +19,10 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="servico-de-autenticacao" options="-parameters" />
+      <module name="servico-de-gateway" options="-parameters" />
+      <module name="servico-descoberta" options="-parameters" />
       <module name="servico_de_autenticacao" options="-parameters" />
+      <module name="servico_de_usuario" options="-parameters" />
     </option>
   </component>
 </project>
