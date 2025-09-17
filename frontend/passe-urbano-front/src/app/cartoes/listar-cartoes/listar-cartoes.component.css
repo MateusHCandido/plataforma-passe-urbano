@@ -1,0 +1,148 @@
+/* Container principal */
+.usuarios-container {
+  padding: 25px;
+  background-color: #ebeaea; 
+  border-radius: 12px;
+  }
+  
+  /* Barra de busca */
+.search-bar {
+  margin-bottom: 20px;
+  text-align: right;
+}
+  
+.search-bar input {
+  padding: 10px 12px;
+  width: 300px;
+  border-radius: 8px;
+  border: 1px solid #c0acac;
+  outline: none;
+  transition: box-shadow 0.2s;
+}
+  
+.search-bar input:focus {
+  box-shadow: 0 0 6px #00acc9;
+  border-color: #00acc9;
+}
+  
+/* Tabela */
+.usuarios-table {
+  width: 100%;
+  min-width: 750px;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+  
+.usuarios-table thead {
+  background-color: #00acc9;
+  color: #fff;
+}
+  
+.usuarios-table th,
+.usuarios-table td {
+  padding: 14px 18px;
+  text-align: left;
+}
+  
+.usuarios-table tbody tr {
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+  
+.usuarios-table tbody tr:hover {
+  background-color: #cceff4; 
+  transform: scale(1.01);
+}
+  
+  /* Paginação */
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+  
+.pagination button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #00acc9; 
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+}
+  
+.pagination button:hover {
+  background-color:  #9dced6;
+  transform: scale(1.05);
+} 
+  
+.pagination button.active {
+  background-color:  #0097a7;
+  cursor: default;
+  transform: none;
+}
+  
+  /* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+  
+.modal-content {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  width: 500px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+  
+.modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #00acc9; 
+}
+  
+.modal-content p {
+  margin: 6px 0;
+}
+  
+.btn-fechar {
+  margin-top: 15px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  background: #00acc9;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+  
+.btn-fechar:hover {
+  background: #0097a7; 
+}
+  
+.ativo {
+      color: #00acc9; 
+      font-weight: bold;
+}
+    
+.inativo {
+  color: #d11d3e; 
+  font-weight: bold;
+}
+  
+.cartoes-lista li {
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+}
+  

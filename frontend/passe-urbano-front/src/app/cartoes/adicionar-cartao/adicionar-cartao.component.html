@@ -1,0 +1,37 @@
+<div class="adicionar-cartao-container">
+  <h2>Adicionar Cartão</h2>
+
+  <form #cartaoForm="ngForm" (ngSubmit)="adicionarCartao(cartaoForm)">
+    <div class="form-group">
+      <label for="emailUsuario">Email do usuário</label>
+      <input
+        type="email"
+        id="emailUsuario"
+        name="emailUsuario"
+        [(ngModel)]="cartao.emailUsuario"
+        placeholder="Digite o email do usuário"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="tipoCartao">Tipo de Cartão</label>
+      <select
+        id="tipoCartao"
+        name="tipoCartao"
+        [(ngModel)]="cartao.tipoCartao"
+        required
+      >
+        <option value="" disabled selected>Selecione um tipo</option>
+        <option *ngFor="let tipo of tiposCartao" [value]="tipo">{{ tipo }}</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn-urbana" [disabled]="cartaoForm.invalid || carregando">
+      {{ carregando ? 'Adicionando...' : 'Adicionar Cartão' }}
+    </button>
+
+    <div *ngIf="mensagemSucesso" class="mensagem-sucesso">{{ mensagemSucesso }}</div>
+    <div *ngIf="mensagemErro" class="mensagem-erro">{{ mensagemErro }}</div>
+  </form>
+</div>

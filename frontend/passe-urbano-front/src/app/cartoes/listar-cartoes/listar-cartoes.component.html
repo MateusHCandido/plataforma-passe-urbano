@@ -1,0 +1,67 @@
+<div class="usuarios-container">
+  <!-- Barra de busca -->
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Buscar cartão..."
+      [(ngModel)]="filtro"
+      (input)="filtrarCartoes()"
+    />
+  </div>
+
+  <!-- Tabela -->
+  <table class="usuarios-table">
+    <thead>
+      <tr>
+        <th>Número</th>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let cartao of cartoesPaginados"
+        (click)="abrirModal(cartao)"
+        class="linha-clickable"
+      >
+        <td>{{ cartao.numeroCartao }}</td>
+        <td>{{ cartao.nome }}</td>
+        <td>{{ cartao.tipoCartao }}</td>
+        <td>
+          <span [ngClass]="cartao.statusCartao ? 'ativo' : 'inativo'">
+            {{ cartao.statusCartao ? 'ATIVO' : 'INATIVO' }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Paginação -->
+  <div class="pagination" *ngIf="paginas.length > 1">
+    <button
+      *ngFor="let page of paginas"
+      (click)="mudarPagina(page)"
+      [class.active]="page === paginaAtual"
+    >
+      {{ page }}
+    </button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="cartaoSelecionado">
+  <div class="modal-content">
+    <h2>Detalhes do Cartão</h2>
+    <p><strong>Número:</strong> {{ cartaoSelecionado.numeroCartao }}</p>
+    <p><strong>Nome:</strong> {{ cartaoSelecionado.nome }}</p>
+    <p><strong>Tipo:</strong> {{ cartaoSelecionado.tipoCartao }}</p>
+    <p>
+      <strong>Status:</strong>
+      <span [ngClass]="cartaoSelecionado.statusCartao ? 'ativo' : 'inativo'">
+        {{ cartaoSelecionado.statusCartao ? 'ATIVO' : 'INATIVO' }}
+      </span>
+    </p>
+    <button class="btn-fechar" (click)="fecharModal()">Fechar</button>
+  </div>
+</div>
