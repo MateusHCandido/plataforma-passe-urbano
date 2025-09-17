@@ -58,6 +58,11 @@ git clone https://github.com/MateusHCandido/plataforma-passe-urbano.git
 docker-compose up --build
 ```
 
+3. Tela inicial da aplicação
+```
+http://localhost:4200/login
+```
+
 Isso vai criar e subir os serviços: PostgreSQL, backend (usuário, autenticação, gateway, Eureka) e frontend Angular com Nginx.
 
 3. Acesse a aplicação:
