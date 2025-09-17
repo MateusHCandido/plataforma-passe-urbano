@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/backend/servico-de-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/servico-descoberta/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/servico_de_autenticacao/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/servico_de_usuario/src/main/java" charset="UTF-8" />
+  </component>
+</project>

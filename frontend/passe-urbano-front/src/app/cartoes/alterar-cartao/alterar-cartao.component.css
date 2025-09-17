@@ -1,0 +1,90 @@
+/* Container */
+.alterar-cartao-container {
+  padding: 25px;
+  background-color: #ebeaea;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 40px auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.alterar-cartao-container h2 {
+  margin-bottom: 20px;
+  color: #00acc9;
+  text-align: center;
+}
+
+/* Formulário */
+.form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #c0acac;
+  outline: none;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #00acc9;
+  box-shadow: 0 0 6px #00acc9;
+}
+
+/* Botão */
+.btn-urbana {
+  width: 100%;
+  padding: 12px;
+  background-color: #00acc9;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-urbana:hover {
+  background-color: #0097a7;
+  transform: scale(1.03);
+}
+
+.btn-urbana:disabled {
+  background-color: #9dced6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Mensagens */
+.mensagem-sucesso,
+.mensagem-erro {
+  margin-top: 15px; 
+  margin-bottom: 20px; 
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.mensagem-sucesso {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.mensagem-erro {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}

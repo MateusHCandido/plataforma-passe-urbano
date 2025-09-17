@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/backend/servico-de-autenticacao/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/servico_de_autenticacao/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/servico_de_usuario/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/servico-descoberta/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/servico-de-gateway/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/backend/servico-de-autenticacao/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="21" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

@@ -1,0 +1,46 @@
+/* Centralizar o card e aplicar estilo */
+.login-card {
+background-color: #fff;
+border-radius: 8px;
+padding: 30px;
+width: 500px;   /* Largura */
+box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+text-align: center;
+}
+  
+/* Cores baseadas no site Urbana */
+.login-title {
+    font-size: 2.5rem; 
+    font-weight: bold;
+    color: #00acc9;
+}
+
+label {
+    font-size: 1.2rem;;
+    color: #777777;
+    font-weight: 500;
+}
+
+input::placeholder {
+    color: label;
+    font-weight: 450;
+}
+
+.btn-urbana {
+background-color: #00acc9; 
+color: #ffffff;
+border-radius: 8px;
+transition: background-color 0.3s ease;
+}
+
+.btn-urbana:hover {
+background-color: #00acc9;
+color: #ffffff;
+}
+
+.text-urbana {
+    color: #00acc9;
+}
+
+
+

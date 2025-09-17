@@ -1,0 +1,64 @@
+<div class="excluir-usuario-container">
+  <h2>Remover Cartão</h2>
+
+  <!-- Campo para buscar cartão -->
+  <div class="form-group">
+    <label for="numeroCartao">Número do Cartão</label>
+    <input
+      type="text"
+      id="numeroCartao"
+      name="numeroCartao"
+      [(ngModel)]="numeroCartaoBusca"
+      placeholder="Digite o número do cartão"
+    />
+  </div>
+
+  <button class="btn-urbana" (click)="buscarCartao()" [disabled]="carregando">
+    {{ carregando ? 'Buscando...' : 'Buscar Cartão' }}
+  </button>
+
+  <!-- Mensagens -->
+  <div *ngIf="mensagemErro" class="mensagem-erro">{{ mensagemErro }}</div>
+  <div *ngIf="mensagemSucesso" class="mensagem-sucesso">{{ mensagemSucesso }}</div>
+
+  <!-- Detalhes do cartão encontrado -->
+  <div *ngIf="cartaoEncontrado" class="cartao-detalhes">
+    <p><strong>Número:</strong> {{ cartaoEncontrado.numeroCartao }}</p>
+    <p><strong>Nome:</strong> {{ cartaoEncontrado.nome }}</p>
+    <p><strong>Tipo:</strong> {{ cartaoEncontrado.tipoCartao }}</p>
+    <p>
+      <strong>Status:</strong>
+      <span [ngClass]="cartaoEncontrado.statusCartao ? 'ativo' : 'inativo'">
+        {{ cartaoEncontrado.statusCartao ? 'ATIVO' : 'INATIVO' }}
+      </span>
+    </p>
+
+    <!-- Botão para abrir modal -->
+    <button class="btn-urbana" (click)="abrirModalExclusao()">
+      Remover Cartão
+    </button>
+  </div>
+</div>
+
+<!-- Modal de Confirmação -->
+<div class="modal-backdrop" *ngIf="confirmacaoExclusao">
+  <div class="modal-content">
+    <h2>Confirmação de Exclusão</h2>
+
+    <p>Tem certeza que deseja remover o seguinte cartão?</p>
+    <p><strong>Número:</strong> {{ cartaoEncontrado?.numeroCartao }}</p>
+    <p><strong>Nome:</strong> {{ cartaoEncontrado?.nome }}</p>
+    <p><strong>Tipo:</strong> {{ cartaoEncontrado?.tipoCartao }}</p>
+    <p>
+      <strong>Status:</strong>
+      <span [ngClass]="cartaoEncontrado?.statusCartao ? 'ativo' : 'inativo'">
+        {{ cartaoEncontrado?.statusCartao ? 'ATIVO' : 'INATIVO' }}
+      </span>
+    </p>
+
+    <button class="btn-urbana" (click)="confirmarExclusao()" [disabled]="carregando">
+      {{ carregando ? 'Excluindo...' : 'Confirmar Exclusão' }}
+    </button>
+    <button class="btn-fechar" (click)="cancelarExclusao()">Cancelar</button>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+version: '3.9'
+
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sistema_cartao_transporte
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/sql-init:/docker-entrypoint-initdb.d
+    networks:
+      - passe-urbano-net
+
+  servico-de-descoberta:
+    build:
+      context: ./backend/servico-descoberta
+      dockerfile: Dockerfile
+    container_name: servico-de-descoberta
+    depends_on:
+      - postgres
+    restart: always
+    ports:
+      - "8761:8761"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8761/actuator/health" ]
+      interval: 5s
+      retries: 12
+    networks:
+      - passe-urbano-net
+
+
+  servico-de-autenticacao:
+    build:
+      context: ./backend/servico_de_autenticacao
+      dockerfile: Dockerfile
+    container_name: servico-de-autenticacao
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - servico-de-descoberta
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://servico-de-descoberta:8761/eureka
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=true
+      - EUREKA_CLIENT_FETCH_REGISTRY=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/sistema_cartao_transporte
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    networks:
+      - passe-urbano-net
+
+  servico-de-usuario:
+    build:
+      context: ./backend/servico_de_usuario
+      dockerfile: Dockerfile
+    container_name: servico-de-usuario
+    restart: always
+    ports:
+      - "8001:8001"
+    depends_on:
+      - postgres
+      - servico-de-descoberta
+      - servico-de-autenticacao
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://servico-de-descoberta:8761/eureka
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=true
+      - EUREKA_CLIENT_FETCH_REGISTRY=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/sistema_cartao_transporte
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    networks:
+      - passe-urbano-net
+
+  servico-de-gateway:
+    build:
+      context: ./backend/servico-de-gateway
+      dockerfile: Dockerfile
+    container_name: servico-de-gateway
+    restart: always
+    ports:
+      - "8765:8765"
+    depends_on:
+      - postgres
+      - servico-de-descoberta
+      - servico-de-autenticacao
+      - servico-de-usuario
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://servico-de-descoberta:8761/eureka
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=true
+      - EUREKA_CLIENT_FETCH_REGISTRY=true
+    networks:
+      - passe-urbano-net
+
+  passe-urbano-front:
+    build:
+      context: ./frontend/passe-urbano-front
+      dockerfile: Dockerfile
+    container_name: passe-urbano-front
+    restart: always
+    ports:
+      - "4200:4200"
+    depends_on:
+      - postgres
+      - servico-de-gateway
+    networks:
+      - passe-urbano-net
+
+volumes:
+  postgres_data:
+
+networks:
+  passe-urbano-net:
+    driver: bridge

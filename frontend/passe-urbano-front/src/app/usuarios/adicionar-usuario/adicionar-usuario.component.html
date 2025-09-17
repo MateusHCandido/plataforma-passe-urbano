@@ -1,0 +1,79 @@
+<div class="adicionar-usuario-container">
+  <h2>Adicionar Novo Usuário</h2>
+
+  <!-- Mensagem de sucesso -->
+  <div *ngIf="mensagemSucesso" class="mensagem-sucesso">
+    {{ mensagemSucesso }}
+  </div>
+
+  <!-- Mensagem de erro -->
+  <div *ngIf="mensagemErro" class="mensagem-erro">
+    {{ mensagemErro }}
+  </div>
+
+  <form (ngSubmit)="adicionarUsuario(usuarioForm)" #usuarioForm="ngForm">
+
+    <!-- Nome -->
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input
+        type="text"
+        id="nome"
+        name="nome"
+        [(ngModel)]="usuario.nome"
+        required
+        placeholder="Digite o nome do usuário"
+      />
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="usuario.email"
+        required
+        placeholder="Digite o email do usuário"
+      />
+    </div>
+
+    <!-- Senha -->
+    <div class="form-group">
+      <label for="senha">Senha</label>
+      <input
+        type="password"
+        id="senha"
+        name="senha"
+        [(ngModel)]="usuario.senha"
+        required
+        placeholder="Digite a senha"
+      />
+    </div>
+
+    <!-- Tipo de usuário -->
+    <div class="form-group">
+      <label for="tipo">Tipo de Usuário</label>
+      <select
+        id="tipo"
+        name="tipo"
+        [(ngModel)]="usuario.permissao"
+        required
+      >
+        <option value="">Selecione</option>
+        <option value="USER">USER</option>
+        <option value="ADMIN">ADMIN</option>
+      </select>
+    </div>
+
+    <!-- Botão -->
+    <div class="form-actions">
+      <button type="submit" 
+              [disabled]="usuarioForm.invalid || carregando" 
+              class="btn-urbana">
+        {{ carregando ? 'Cadastrando...' : 'Adicionar Usuário' }}
+      </button>
+    </div>
+  </form>
+</div>

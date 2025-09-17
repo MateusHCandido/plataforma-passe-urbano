@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: servico-de-autenticacao
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sistema_cartao_transporte
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+eureka:
+  client:
+    enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+
+oauth:
+  client:
+    login: urbanape
+    secret: urbanape123
+
+security:
+  jwt:
+    signing-key: urbanape
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+server:
+  port: 8000
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html

@@ -1,0 +1,56 @@
+<div class="usuarios-container">
+  <h3>📋 Auditoria de Ações</h3>
+
+  <!-- Barra de busca -->
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Buscar logs..."
+      [(ngModel)]="filtro"
+      (input)="filtrarLogs()"
+    />
+  </div>
+
+  <!-- Mensagens -->
+  <div *ngIf="loading" class="alert alert-info">Carregando logs...</div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <!-- Tabela -->
+  <table *ngIf="!loading && logsPaginados.length > 0" class="usuarios-table">
+    <thead>
+      <tr>
+        <th>Usuário</th>
+        <th>Ação</th>
+        <th>Entidade</th>
+        <th>ID da Entidade</th>
+        <th>Data/Hora</th>
+        <th>Detalhes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let log of logsPaginados">
+        <td>{{ log.usuarioEmail }}</td>
+        <td>{{ log.acao }}</td>
+        <td>{{ log.entidade }}</td>
+        <td>{{ log.entidadeId }}</td>
+        <td>{{ log.timestamp | date:'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ log.detalhe }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Paginação -->
+  <div class="pagination" *ngIf="totalPaginas > 1">
+    <button
+      *ngFor="let page of paginas"
+      (click)="mudarPagina(page)"
+      [class.active]="page === paginaAtual"
+    >
+      {{ page }}
+    </button>
+  </div>
+
+  <div *ngIf="!loading && logsPaginados.length === 0" class="alert alert-warning">
+    Nenhum log encontrado
+  </div>
+</div>

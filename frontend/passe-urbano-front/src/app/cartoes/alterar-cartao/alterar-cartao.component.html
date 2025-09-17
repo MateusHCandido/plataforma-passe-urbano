@@ -1,0 +1,30 @@
+<!-- Container principal -->
+<div class="alterar-cartao-container">
+  <h2>Ativar/Inativar Cartão</h2>
+
+  <!-- Input do número do cartão -->
+  <div class="form-group">
+    <label for="numeroCartao">Número do Cartão</label>
+    <input
+      type="text"
+      id="numeroCartao"
+      [(ngModel)]="numeroCartao"
+      name="numeroCartao"
+      placeholder="Digite o número do cartão"
+      required
+    />
+  </div>
+
+  <!-- Botão de ação -->
+  <button class="btn-urbana" (click)="ativarInativar()" [disabled]="carregando">
+    {{ carregando ? 'Processando...' : 'Ativar/Inativar' }}
+  </button>
+
+  <!-- Mensagens -->
+  <div *ngIf="mensagemSucesso" class="mensagem-sucesso">
+    {{ mensagemSucesso }}
+  </div>
+  <div *ngIf="mensagemErro" class="mensagem-erro">
+    {{ mensagemErro }}
+  </div>
+</div>

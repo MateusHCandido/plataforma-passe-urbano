@@ -1,0 +1,69 @@
+<div class="excluir-usuario-container">
+  <h2>Excluir Usuário</h2>
+
+  <div class="form-group">
+    <label for="emailBusca">Email do usuário</label>
+    <input
+      type="email"
+      id="emailBusca"
+      [(ngModel)]="emailBusca"
+      name="emailBusca"
+      placeholder="Digite o email do usuário"
+      required
+    />
+  </div>
+
+  <button class="btn-urbana" (click)="buscarUsuario()" [disabled]="carregando">
+    {{ carregando ? 'Buscando...' : 'Buscar Usuário' }}
+  </button>
+
+  <!-- Mensagens fora do modal -->
+  <div *ngIf="mensagemErro && !usuarioEncontrado" class="mensagem-erro">
+    {{ mensagemErro }}
+  </div>
+  <div *ngIf="mensagemSucesso && !usuarioEncontrado" class="mensagem-sucesso">
+    {{ mensagemSucesso }}
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="usuarioEncontrado">
+  <div class="modal-content">
+    <h2>Confirmar Exclusão</h2>
+
+    <p><strong>Nome:</strong> {{ usuarioEncontrado.nome }}</p>
+    <p><strong>Email:</strong> {{ usuarioEncontrado.email }}</p>
+    <p><strong>Permissão:</strong> {{ usuarioEncontrado.permissao }}</p>
+
+    <div *ngIf="usuarioEncontrado.cartoes?.length > 0">
+      <h3>Cartões</h3>
+      <ul class="cartoes-lista">
+        <li *ngFor="let cartao of usuarioEncontrado.cartoes">
+          <p><strong>Número:</strong> {{ cartao.numeroCartao }}</p>
+          <p><strong>Tipo:</strong> {{ cartao.tipoCartao }}</p>
+          <p>
+            <strong>Status:</strong>
+            <span [ngClass]="cartao.statusCartao ? 'ativo' : 'inativo'">
+              {{ cartao.statusCartao ? 'ATIVO' : 'INATIVO' }}
+            </span>
+          </p>
+          <hr />
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="!usuarioEncontrado.cartoes || usuarioEncontrado.cartoes.length === 0">
+      <p>Não há cartões cadastrados.</p>
+    </div>
+
+    <button class="btn-urbana" (click)="deletarUsuario()" [disabled]="carregando">
+      {{ carregando ? 'Excluindo...' : 'Confirmar Exclusão' }}
+    </button>
+
+    <!-- Mensagens dentro do modal -->
+    <div *ngIf="mensagemErro" class="mensagem-erro">{{ mensagemErro }}</div>
+    <div *ngIf="mensagemSucesso" class="mensagem-sucesso">{{ mensagemSucesso }}</div>
+
+    <button class="btn-fechar" (click)="fecharModal()">Fechar</button>
+  </div>
+</div>

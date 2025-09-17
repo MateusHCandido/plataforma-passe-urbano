@@ -1,0 +1,157 @@
+/* Container principal do formulário */
+.adicionar-cartao-container {
+  padding: 25px;
+  background-color: #ebeaea;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 30px auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título da tela */
+.adicionar-cartao-container h2 {
+  color: #00acc9;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Grupos de campos do formulário */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #007b99; 
+  text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  transition: color 0.3s;
+}
+
+/* Inputs do formulário */
+.form-group input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #c0acac;
+  outline: none;
+  font-size: 1rem;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.form-group input:focus {
+  box-shadow: 0 0 6px #00acc9;
+  border-color: #00acc9;
+  color: #007b99;
+}
+
+/* Select moderno */
+.form-group select {
+    width: 100%;
+    padding: 10px 40px 10px 12px; 
+    border-radius: 8px;
+    border: 1px solid #c0acac;
+    outline: none;
+    background-color: #fff;
+    color: #333;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23007b99' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+    cursor: pointer;
+  }
+
+.form-group select:focus {
+  border-color: #00acc9;
+  box-shadow: 0 0 6px rgba(0, 172, 201, 0.5);
+  transform: scale(1.02);
+}
+
+.form-group select option {
+  color: #333;
+}
+
+/* Placeholder e opção vazia */
+input::placeholder,
+select option[value=""] {
+  color: #999;
+}
+
+/* Labels mudam de cor ao focar */
+.form-group input:focus + label,
+.form-group select:focus + label {
+  color: #00acc9;
+}
+
+/* Botão do formulário */
+.btn-urbana {
+  display: inline-block;
+  min-width: 180px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  background-color: #00acc9;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-urbana:hover:not(:disabled) {
+  background-color: #0097a7;
+  transform: scale(1.03);
+}
+
+.btn-urbana:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Mensagens */
+.mensagem-sucesso,
+.mensagem-erro {
+  margin-top: 15px;
+  margin-bottom: 20px; 
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.mensagem-sucesso {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.mensagem-erro {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Animação */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsividade */
+@media (max-width: 576px) {
+  .adicionar-cartao-container {
+    padding: 20px;
+    margin: 20px 15px;
+  }
+
+  .btn-urbana {
+    width: 100%;
+    min-width: unset;
+  }
+}
