@@ -1,0 +1,51 @@
+<div class="dashboard">
+
+  <!-- Cards de resumo -->
+  <div class="summary-cards">
+    <div class="card">
+      <h3>Total de Usuários</h3>
+      <p>{{ totalUsuarios }}</p>
+    </div>
+    <div class="card">
+      <h3>Cartões Ativos</h3>
+      <p>{{ totalCartoesAtivos }}</p>
+    </div>
+    <div class="card">
+      <h3>Cartões Inativos</h3>
+      <p>{{ totalCartoesInativos }}</p>
+    </div>
+  </div>
+
+  <!-- Gráficos -->
+  <div class="charts">
+    <div class="chart-card">
+      <h4>Distribuição de Usuários por Permissão</h4>
+      <canvas baseChart
+              [data]="usuariosPorTipoData"
+              [labels]="usuariosPorTipoLabels"
+              [chartType]="'pie'"
+              [colors]="usuariosPorTipoColors">
+      </canvas>
+    </div>
+
+    <div class="chart-card">
+      <h4>Distribuição de Cartões por Tipo</h4>
+      <canvas baseChart
+              [data]="cartoesPorTipoData"
+              [labels]="cartoesPorTipoLabels"
+              [chartType]="'pie'"
+              [colors]="cartoesPorTipoColors">
+      </canvas>
+    </div>
+
+    <div class="chart-card">
+      <h4>Cartões Ativos vs Inativos</h4>
+      <canvas baseChart
+              [data]="cartoesAtivosInativosData"
+              [labels]="cartoesAtivosInativosLabels"
+              [chartType]="'doughnut'"
+              [colors]="cartoesAtivosInativosColors">
+      </canvas>
+    </div>
+  </div>
+</div>
